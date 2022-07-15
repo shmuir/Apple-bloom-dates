@@ -1,0 +1,57 @@
+---
+title: "Apple bloom plots"
+author: "Sam Muir"
+date: "7/15/2022"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = "hide", warning = FALSE, message = FALSE, fig.width = 11)
+knitr::opts_knit$set(root.dir = '../')
+
+library(tidyverse)
+library(viridis)
+library(patchwork)
+library(knitr)
+```
+
+
+```{r}
+temp_locations <- read_csv("Data/cleaned/all_locations_temp.csv")
+bloom_temp <- read_csv("Data/cleaned/bloom_temps.csv")
+gdd <- read_csv("Data/cleaned/apple_sum_gdds.csv")
+```
+
+## Historical Temperature Trends
+```{r}
+temp_max <- ggplot(bloom_temp, aes(x = year, y = temp_max, color = location)) +
+  geom_point() +
+  geom_line() +
+  theme_light() +
+  scale_color_viridis_d()
+
+temp_min <- ggplot(bloom_temp, aes(x = year, y = temp_min, color = location)) +
+  geom_point() +
+  geom_line() +
+  theme_light() +
+  scale_color_viridis_d()
+
+temp_max + temp_min + plot_layout(guides = "collect")
+```
+
+## Day of Full Bloom
+```{r}
+ggplot(bloom_temp, aes(x = year, y = doy_bloom, color = location)) +
+  geom_point() +
+  geom_line() +
+  theme_light() +
+  scale_color_viridis_d()
+```
+
+
+```{r}
+
+```
+

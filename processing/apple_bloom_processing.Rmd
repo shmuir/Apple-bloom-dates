@@ -10,7 +10,6 @@ editor_options:
 library(tidyverse)
 library(lubridate)
 library(janitor)
-library(viridis)
 ```
 
 ## Read in data and clean
@@ -45,11 +44,14 @@ gdd <- read_csv("Data/raw/GDDs_sums.csv") %>%
          high_temp_9 = high)
 ```
 
+```{r}
+temp_all <- rbind(hudson, rock_springs, winchester)
+```
+
+
 ## Export cleaned data
 ```{r}
-write_csv(hudson, "Data/cleaned/hudson_temp.csv")
-write_csv(rock_springs, "Data/cleaned/rock_springs_temp.csv")
-write_csv(winchester, "Data/cleaned/winchester_temp.csv")
+write_csv(temp_all, "Data/cleaned/all_locations_temp.csv")
 write_csv(bloom_temps, "Data/cleaned/bloom_temps.csv")
 write_csv(gdd, "Data/cleaned/apple_sum_gdds.csv")
 ```
