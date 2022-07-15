@@ -2,7 +2,7 @@
 title: "Apple bloom plots"
 author: "Sam Muir"
 date: "7/15/2022"
-output: html_document
+output: github_document
 editor_options: 
   chunk_output_type: console
 ---
