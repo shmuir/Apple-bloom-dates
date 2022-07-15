@@ -1,0 +1,35 @@
+---
+title: "apple bloom processing"
+author: "Sam Muir"
+date: "7/14/2022"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+
+```{r}
+hudson <- read_csv("Data/hudson_valley_nearest.csv") %>%
+  mutate(location = "Hudson Valley",
+         doy = yday(month_period),
+         year = year(month_period))
+
+rock_springs <- read_csv("Data/rock_springs_nearest.csv") %>%
+  mutate(location = "Rock Springs",
+         doy = yday(month_period),
+         year = year(month_period))
+
+winchester <- read_csv("Data/winchester_nearest.csv") %>%
+  mutate(location = "Winchester",
+         doy = yday(month_period),
+         year = year(month_period))
+```
+
+```{r}
+
+```
+
