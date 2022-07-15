@@ -15,6 +15,7 @@ library(tidyverse)
 library(viridis)
 library(patchwork)
 library(knitr)
+library(ggpubr)
 ```
 
 
@@ -50,8 +51,38 @@ ggplot(bloom_temp, aes(x = year, y = doy_bloom, color = location)) +
   scale_color_viridis_d()
 ```
 
+## Growing Degree Days 
 
+# Using 4ºC
 ```{r}
+ggplot(gdd, aes(x = year, y = low_temp_4, color = location)) +
+  geom_point() +
+  geom_smooth(method='lm', formula = y ~ x, se = FALSE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~"), color = location)) +
+  theme_light() +
+  scale_color_viridis_d()
+```
 
+# Using 7.22ºC
+```{r}
+ggplot(gdd, aes(x = year, y = mid_temp_7.22, color = location)) +
+  geom_point() +
+  geom_smooth(method='lm', formula = y ~ x, se = FALSE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~"), color = location)) + 
+  theme_light() +
+  scale_color_viridis_d()
+```
+
+# Using 9ºC
+```{r}
+ggplot(gdd, aes(x = year, y = high_temp_9, color = location)) +
+  geom_point() +
+  geom_smooth(method='lm', formula = y ~ x, se = FALSE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~"), color = location)) +
+  theme_light() +
+  scale_color_viridis_d()
 ```
 
