@@ -9,27 +9,48 @@ editor_options:
 ```{r}
 library(tidyverse)
 library(lubridate)
+library(janitor)
+library(viridis)
 ```
 
-
+## Read in data and clean
 ```{r}
-hudson <- read_csv("Data/hudson_valley_nearest.csv") %>%
+hudson <- read_csv("Data/raw/hudson_valley_nearest.csv") %>%
   mutate(location = "Hudson Valley",
          doy = yday(month_period),
-         year = year(month_period))
+         year = year(month_period)) %>%
+  clean_names()
 
-rock_springs <- read_csv("Data/rock_springs_nearest.csv") %>%
+rock_springs <- read_csv("Data/raw/rock_springs_nearest.csv") %>%
   mutate(location = "Rock Springs",
          doy = yday(month_period),
-         year = year(month_period))
+         year = year(month_period)) %>%
+  clean_names()
 
-winchester <- read_csv("Data/winchester_nearest.csv") %>%
+winchester <- read_csv("Data/raw/winchester_nearest.csv") %>%
   mutate(location = "Winchester",
          doy = yday(month_period),
-         year = year(month_period))
+         year = year(month_period)) %>%
+  clean_names()
+
+bloom_temps <- read_csv("Data/raw/apple_avg_fullbloom.csv") %>%
+  rename(date_bloom = date,
+         doy_bloom = doy,
+         temp_max = max,
+         temp_min = min)
+
+gdd <- read_csv("Data/raw/GDDs_sums.csv") %>%
+  rename(low_temp_4 = low,
+         mid_temp_7.22 = middle,
+         high_temp_9 = high)
 ```
 
+## Export cleaned data
 ```{r}
-
+write_csv(hudson, "Data/cleaned/hudson_temp.csv")
+write_csv(rock_springs, "Data/cleaned/rock_springs_temp.csv")
+write_csv(winchester, "Data/cleaned/winchester_temp.csv")
+write_csv(bloom_temps, "Data/cleaned/bloom_temps.csv")
+write_csv(gdd, "Data/cleaned/apple_sum_gdds.csv")
 ```
 
