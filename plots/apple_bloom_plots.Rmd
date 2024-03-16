@@ -41,7 +41,7 @@ temp_min <- ggplot(bloom_temp, aes(x = year, y = temp_min, color = location)) +
   labs(x = "", y = "Minimum Temperature (ºC)") +
   scale_color_viridis_d()
 
-temp_max + temp_min + plot_layout(guides = "collect")
+temp_max / temp_min + plot_layout(guides = "collect")
 ```
 
 ## Day of Full Bloom
@@ -85,6 +85,7 @@ ggplot(gdd, aes(x = year, y = low_temp_4, color = location)) +
 ```{r}
 ggplot(gdd, aes(x = year, y = mid_temp_7.22, color = location)) +
   geom_point() +
+  geom_line(alpha = 0.5) +
   geom_smooth(method='lm', formula = y ~ x, se = FALSE) +
   stat_regline_equation(
     aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~"), color = location)) + 
@@ -93,13 +94,27 @@ ggplot(gdd, aes(x = year, y = mid_temp_7.22, color = location)) +
   scale_color_viridis_d()
 ```
 
+
+```{r}
+ggplot(gdd, aes(x = doy_fullbloom, y = mid_temp_7.22, color = location)) +
+  geom_point() +
+  geom_line(alpha = 0.5) +
+  geom_smooth(method='lm', formula = y ~ x, se = FALSE) +
+  stat_regline_equation(
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~"), color = location)) + 
+  labs(x = "", y = "Growing Degree Days") +
+  theme_linedraw() +
+  scale_color_viridis_d()
+```
+
+
 # Using 9ºC
 ```{r}
 ggplot(gdd, aes(x = year, y = high_temp_9, color = location)) +
   geom_point() +
   geom_smooth(method='lm', formula = y ~ x, se = FALSE) +
   stat_regline_equation(
-    aaes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~"), color = location)) +
+    aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~"), color = location)) +
   labs(x = "", y = "Growing Degree Days") +
   theme_linedraw() +
   scale_color_viridis_d()
